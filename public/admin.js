@@ -7,7 +7,8 @@ async function main(){
 
 //save function to send updated information to server
 async function save(num){
-    let adminInput = document.getElementById('adminInput').value;
+    let input = document.getElementById(`adminInput${num}`).value;
+    
     
     await fetch('http://localhost:3001/updateBook', {
         method: 'PATCH',
@@ -15,8 +16,9 @@ async function save(num){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            id: num,
-            quantity: adminInput
+            id: num, 
+            quantity: input 
+            
         })
     })
 }
@@ -24,19 +26,19 @@ async function save(num){
 
 function displayTitle(book){
     let root = document.getElementById('root');
-    
+    //var bookID = book.id;
     root.innerHTML += `
         <ul>
             <li>
                 <label>
                 ${book.title}
                 </label>
-                <input id = 'adminInput'>
-                <button onclick = save(${book.id})> Save </button>
+                <input id = 'adminInput${book.id}'/>
+                <button onclick = "save(${book.id})"> Save </button>
             </li>
         </ul>
     `
-    
+ 
 
 }
 
