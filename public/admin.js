@@ -5,19 +5,22 @@ async function main(){
     bookList.forEach(displayTitle);
 }
 
-/*async function save(book){
+//save function to send updated information to server
+async function save(num){
     let adminInput = document.getElementById('adminInput').value;
+    
     await fetch('http://localhost:3001/updateBook', {
         method: 'PATCH',
         headers: {
-            'Content-Type': 'applications/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            id: book.id,
+            id: num,
             quantity: adminInput
         })
     })
-}*/
+}
+
 
 function displayTitle(book){
     let root = document.getElementById('root');
@@ -29,7 +32,7 @@ function displayTitle(book){
                 ${book.title}
                 </label>
                 <input id = 'adminInput'>
-                <button onclick = 'save()'> Save </button>
+                <button onclick = save(${book.id})> Save </button>
             </li>
         </ul>
     `
